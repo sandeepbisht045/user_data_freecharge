@@ -1,7 +1,6 @@
-from django.http import HttpResponse,JsonResponse
+from django.http import JsonResponse
 from googleapiclient.discovery import build
 from google.oauth2 import service_account
-import json
 
 def data_get(request):
         # Service Account Credential file
@@ -26,9 +25,9 @@ def data_get(request):
         #starttime = sT.isoformat("T") + "Z"  
         # startTime='2023-02-18T10:26:35.000Z'      
         # Making multiple Api call to re
-        results = directory_service.users().list(domain= 'freecharge.com', maxResults=10
+        results = directory_service.users().list(domain= 'freecharge.com', maxResults=500
                                 ,orderBy='email').execute()
         users = results.get('users', [])
-        print(type(users))
-        users = [{'id':data.get('id',False),'primaryEmail':data.get('primaryEmail',False),'suspended':data.get('suspended',False)} for data in users]
+        # print(len(users))
+        users = [{'id':data.get('id'),'fullName':data.get('name').get('fullName'),'primaryEmail':data.get('primaryEmail'),'suspended':data.get('suspended')} for data in users]
         return JsonResponse(users,safe=False)
