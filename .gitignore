@@ -11,6 +11,7 @@ tests.py
 db.sqlite3
 
 # Environments 
+.environ_var
 .env1
 .env 
 .venv 
