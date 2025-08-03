@@ -34,7 +34,7 @@ def data_get(request):
                 maxResults=1
                 ).execute()
                 if results and not results.get('users'):
-                        emp.append({'message':'Invalid Employee Code'})
+                        emp_data.append({'message':'Invalid Employee Code'})
                 if results.get('users'):
                         res_user = results.get('users')[0]
                         matched_user_data = {'employeeCode':res_user['externalIds'][0]['value'],'primaryEmail':res_user.get('primaryEmail')
